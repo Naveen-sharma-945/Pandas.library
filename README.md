@@ -110,18 +110,6 @@ print(df)
 
 ---
 
-### 🔍 **Checking Data**
-
-```python
-df.head()         # First 5 rows
-df.tail()         # Last 5 rows
-df.info()         # Info about columns and data types
-df.shape          # (rows, columns)
-df.columns        # List of column names
-df.describe()     # Summary of numerical data
-```
-
----
 
 ### 🎯 **Selecting Data**
 
