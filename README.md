@@ -1,167 +1,319 @@
-# Numpy
+## 1. Introduction to NumPy
 
-## Importing numpy library
+Full form: Numerical Python
 
-```python
+Use: Efficient handling of arrays (lists of numbers in multiple dimensions).
+
+Why NumPy?
+
+Normal Python lists are slow.
+
+NumPy arrays are much faster (written in C).
+
+Provides built-in functions for mathematical, logical, and statistical operations.
+
+
+
+
+---
+
+## 2. NumPy Array (ndarray)
+
+Core of NumPy = ndarray (N-dimensional array).
+
+Think of it as a super-powered list with fixed size and type.
+
+---
+
+## 1. Installing & Importing NumPy
+```bash
+# Install (if not installed)
+# pip install numpy
+
 import numpy as np
-import warnings
-warnings.filterwarnings("ignore")
-from IPython.display import Image
+```
+## 2. Creating Arrays
+
+NumPy arrays are faster and more efficient than Python lists.
+
+```bash
+# 1D array
+arr1 = np.array([1, 2, 3, 4, 5])
+print("1D Array:", arr1)
+
+# 2D array (Matrix)
+arr2 = np.array([[1, 2, 3], [4, 5, 6]])
+print("\n2D Array:\n", arr2)
+
+# 3D array
+arr3 = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+print("\n3D Array:\n", arr3)
 ```
 
-## Creating array
+## Output:
 
-```python
-list1 = [10,20,30,40,50,60,70,80,90,100]
-list1
+```bash
+1D Array: [1 2 3 4 5]
+
+2D Array:
+ [[1 2 3]
+  [4 5 6]]
+
+3D Array:
+ [[[1 2]
+   [3 4]]
+
+  [[5 6]
+   [7 8]]]
 ```
-#### Output
-([ 10,  20,  30,  40,  50,  60,  70,  80,  90, 100])
+## 3. Array Attributes
 
-## Displaying type of object
-
-```python
-type(list1)
+```bash
+print("Shape:", arr2.shape)   # (rows, columns)
+print("Dimensions:", arr2.ndim)
+print("Size:", arr2.size)     # total elements
+print("Data Type:", arr2.dtype)
 ```
-#### Output
-list
 
-## Converting list to Numpy array
+## Output:
 
-```python
-#Convert list to Numpy Array
-arr1 = np.array(list1)
-arr1
+```bash
+Shape: (2, 3)
+Dimensions: 2
+Size: 6
+Data Type: int64
 ```
-#### Output
-array([ 10,  20,  30,  40,  50,  60,  70,  80,  90, 100])
 
-## Memory address of array object
 
-```python
-arr1.data
+---
+
+## 4. Special Arrays
+
+```bash
+print("Zeros:\n", np.zeros((2, 3)))
+print("\nOnes:\n", np.ones((3, 3)))
+print("\nIdentity:\n", np.eye(3))
+print("\nArange:", np.arange(0, 10, 2))   # like range()
+print("\nLinspace:", np.linspace(0, 1, 5)) # evenly spaced numbers
 ```
-#### Output
-<memory at 0x7c7934e91480>
 
-## Type of object
+## Output:
 
-```python
-type(arr1)
+```bash
+Zeros:
+ [[0. 0. 0.]
+  [0. 0. 0.]]
+
+Ones:
+ [[1. 1. 1.]
+  [1. 1. 1.]
+  [1. 1. 1.]]
+
+Identity:
+ [[1. 0. 0.]
+  [0. 1. 0.]
+  [0. 0. 1.]]
+
+Arange: [0 2 4 6 8]
+Linspace: [0.   0.25 0.5  0.75 1.  ]
 ```
-#### Output
-numpy.ndarray
 
-## Datatype of array
 
-```python
-arr1.dtype
+---
+
+## 5. Indexing & Slicing
+
+```bash
+arr = np.array([10, 20, 30, 40, 50])
+print("Element at index 2:", arr[2])
+print("Slice 1:4:", arr[1:4])
+
+mat = np.array([[1,2,3],[4,5,6],[7,8,9]])
+print("\nElement (2nd row, 3rd col):", mat[1, 2])
+print("First row:", mat[0])
+print("Last column:", mat[:, -1])
 ```
-#### Output
-dtype('int64')
 
-## Converting integer array to float
+# Output:
 
-```python
-arr1.astype(float)
+```bash
+Element at index 2: 30
+Slice 1:4: [20 30 40]
+
+Element (2nd row, 3rd col): 6
+First row: [1 2 3]
+Last column: [3 6 9]
 ```
-#### Output
-array([ 10.,  20.,  30.,  40.,  50.,  60.,  70.,  80.,  90., 100.])
 
-## Generate numbers till 150 with spaces of 10
 
-```python
-np.arange(0,150,10)
+---
+
+# 6. Mathematical Operations
+
+```bash
+a = np.array([1, 2, 3, 4])
+b = np.array([5, 6, 7, 8])
+
+print("Addition:", a + b)
+print("Subtraction:", a - b)
+print("Multiplication:", a * b)
+print("Division:", b / a)
+print("Power:", a ** 2)
 ```
-#### Output
-array([  0,  10,  20,  30,  40,  50,  60,  70,  80,  90, 100, 110, 120, 130, 140])
 
-## Repeat a number in the array
+# Output:
 
-```python
-np.repeat(20, 7)
+```bash
+Addition: [ 6  8 10 12]
+Subtraction: [-4 -4 -4 -4]
+Multiplication: [ 5 12 21 32]
+Division: [5.   3.   2.33 2.  ]
+Power: [ 1  4  9 16]
 ```
-#### Output
-array([20, 20, 20, 20, 20, 20, 20])
 
-## Array of random numbers
 
-```python
-np.random.randint(0,500,10)
+---
+
+## 7. Aggregation Functions
+
+```bash
+mat = np.array([[1,2,3],[4,5,6],[7,8,9]])
+
+print("Sum:", mat.sum())
+print("Row-wise Sum:", mat.sum(axis=1))
+print("Column-wise Sum:", mat.sum(axis=0))
+print("Mean:", mat.mean())
+print("Max:", mat.max())
+print("Min:", mat.min())
+print("Standard Deviation:", mat.std())
 ```
-#### Output
-array([198, 358, 279, 474, 477])
 
-# Operations on Array
+## Output:
 
-```python
-arr2 = np.arange(1,25)
-arr2
+```bash
+Sum: 45
+Row-wise Sum: [ 6 15 24]
+Column-wise Sum: [12 15 18]
+Mean: 5.0
+Max: 9
+Min: 1
+Standard Deviation: 2.581988897
 ```
-#### Output
-array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24])
 
-## Sum of all elements
 
-```python
-arr2.sum()
+---
+
+## 8. Reshaping & Flattening
+
+``` bash
+arr = np.arange(1, 13)
+print("Original:", arr)
+
+reshaped = arr.reshape(3, 4)
+print("\nReshaped 3x4:\n", reshaped)
+
+flattened = reshaped.flatten()
+print("\nFlattened:", flattened)
 ```
-#### Output
-np.int64(300)
 
-## Cumulative sum
+## Output:
 
-```python
-arr2.sum()
+```bash
+Original: [ 1  2  3  4  5  6  7  8  9 10 11 12]
+
+Reshaped 3x4:
+ [[ 1  2  3  4]
+  [ 5  6  7  8]
+  [ 9 10 11 12]]
+
+Flattened: [ 1  2  3  4  5  6  7  8  9 10 11 12]
 ```
-#### Output
-array([  1,   3,   6,  10,  15,  21,  28,  36,  45,  55,  66,  78,  91,
-       105, 120, 136, 153, 171, 190, 210, 231, 253, 276, 300])
 
- ## Finding min number
- 
-```python
-arr2.min()
+
+---
+
+## 9. Stacking & Splitting
+
+```bash
+a = np.array([[1,2],[3,4]])
+b = np.array([[5,6],[7,8]])
+
+print("Vertical Stack:\n", np.vstack((a,b)))
+print("\nHorizontal Stack:\n", np.hstack((a,b)))
+
+arr = np.arange(1, 10)
+print("\nSplit:", np.split(arr, 3))
 ```
-#### Output
-np.int64(1)
 
-## Finding max number
+## Output:
 
-```python
-arr2.max()
+```bash
+Vertical Stack:
+ [[1 2]
+  [3 4]
+  [5 6]
+  [7 8]]
+
+Horizontal Stack:
+ [[1 2 5 6]
+  [3 4 7 8]]
+
+Split: [array([1, 2, 3]), array([4, 5, 6]), array([7, 8, 9])]
 ```
-#### Output
-np.int64(24)
 
-## Finding mean of all numbers in an array
 
-```python
-arr.mean()
+---
+
+## 10. Linear Algebra
+
+```bash
+import numpy as np
+
+mat1 = np.array([[1,2],
+                 [3,4]])
+
+mat2 = np.array([[5,6],
+                 [7,8]])
+
+print("Matrix 1:\n", mat1)
+print("Matrix 2:\n", mat2)
+
+# Dot Product
+print("\nDot Product:\n", np.dot(mat1, mat2))
+
+# Transpose
+print("\nTranspose of mat1:\n", mat1.T)
+
+# Inverse of mat1
+print("\nInverse of mat1:\n", np.linalg.inv(mat1))
+
+# Determinant
+print("\nDeterminant of mat1:", np.linalg.det(mat1))
 ```
-#### Output
-np.float64(12.5)
+## output
 
-## Finding median of all numbers in an array
+```bash
+Matrix 1:
+ [[1 2]
+  [3 4]]
 
-```python
-np.median(arr2)
+Matrix 2:
+ [[5 6]
+  [7 8]]
+
+Dot Product:
+ [[19 22]
+  [43 50]]
+
+Transpose of mat1:
+ [[1 3]
+  [2 4]]
+
+Inverse of mat1:
+ [[-2.   1. ]
+  [ 1.5 -0.5]]
+
+Determinant of mat1: -2.0000000000000004
 ```
-#### Output
-np.float64(12.5)
 
-## Finding variance
 
-```python
-np.var(arr2)
-```
-#### Output
-np.float64(47.916666666666664)
-
-## Finding standard deviation
-
-```python
-np.std(arr2)
-```
-#### Output
-np.float64(6.922186552431729)
