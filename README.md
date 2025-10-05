@@ -1,7 +1,4 @@
 
----
-
-## 🐼 **Pandas — Complete Beginner Introduction**
 
 ---
 
