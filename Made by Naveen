@@ -1,0 +1,195 @@
+---
+
+## 🐼 **What is Pandas?**
+
+**Pandas** is a **Python library** used for **data analysis, manipulation, and cleaning**.
+It provides fast, flexible, and expressive **data structures** designed to make working with structured data (like tables, spreadsheets, or databases) easy and efficient.
+
+---
+Import it into your Python code:
+
+```python
+import pandas as pd
+```
+
+
+---
+
+
+---
+
+## 🧱 **1. Creating Data**
+
+### ➤ **From a list**
+
+```python
+import pandas as pd
+
+data = [10, 20, 30, 40]
+s = pd.Series(data)
+print(s)
+```
+
+### ➤ **From a dictionary**
+
+```python
+data = {
+    'Name': ['Naveen', 'Mayank', 'Sumit'],
+    'Age': [21, 22, 23],
+    'Marks': [85, 90, 88]
+}
+
+df = pd.DataFrame(data)
+print(df)
+```
+
+---
+
+## 📋 **2. Viewing and Inspecting Data**
+
+```python
+df.head()      # First 5 rows
+df.tail(3)     # Last 3 rows
+df.info()      # Column info and data types  
+df.shape       # (rows, columns)
+df.columns     # List of column names
+```
+
+---
+
+## 🔍 **3. Selecting Data**
+
+### ➤ **By column**
+
+```python
+df['Name']        # Single column
+df[['Name', 'Age']]  # Multiple columns
+```
+
+### ➤ **By row index**
+
+```python
+df.loc[0]   # Row by label (index)
+df.iloc[1]  # Row by integer position
+```
+
+### ➤ **Slicing**
+
+```python
+df[0:2]   # First 2 rows
+```
+
+---
+
+## 🧮 **4. Filtering and Conditions**
+
+```python
+df[df['Marks'] > 85]          # Filter rows
+df[(df['Age'] > 21) & (df['Marks'] < 90)]  # Multiple conditions
+```
+
+---
+
+## ✏️ **5. Adding / Modifying Data**
+
+```python
+df['Grade'] = ['A', 'A+', 'B']        # Add new column
+df['Marks'] = df['Marks'] + 5         # Modify existing column
+```
+
+---
+
+## ❌ **6. Deleting Data**
+
+```python
+df.drop('Grade', axis=1, inplace=True)   # Drop column
+df.drop(0, axis=0, inplace=True)         # Drop row by index
+```
+
+---
+
+## 🔄 **7. Sorting and Indexing**
+
+```python
+df.sort_values(by='Marks', ascending=False)
+df.reset_index(drop=True, inplace=True)
+```
+
+---
+
+## 📊 **8. Grouping and Aggregation**
+
+```python
+df.groupby('Age')['Marks'].mean()   # Average marks by age
+df.groupby('Age').sum()             # Sum by each age group
+```
+
+---
+
+## 📁 **9. Reading and Writing Files**
+
+### ➤ **CSV Files**
+
+```python
+df.to_csv("output.csv", index=False)    # Write to CSV
+pd.read_csv("output.csv")               # Read from CSV
+```
+
+### ➤ **Excel Files**
+
+```python
+df.to_excel("data.xlsx", index=False)
+pd.read_excel("data.xlsx")
+```
+
+---
+
+## 🧼 **10. Handling Missing Data**
+
+```python
+df.isnull().sum()       # Check missing values
+df.fillna(0, inplace=True)    # Replace NaN with 0
+df.dropna(inplace=True)       # Remove rows with NaN
+```
+
+---
+
+## ⚡ **11. Common Operations**
+
+```python
+df['Marks'].mean()
+df['Marks'].max()
+df['Marks'].min()
+df['Marks'].sum()
+df['Marks'].value_counts()
+```
+
+---
+
+## 🧠 **12. Example Mini Project**
+
+```python
+import pandas as pd
+
+data = {
+    'Name': ['Ravi', 'Neha', 'Karan', 'Anita'],
+    'Age': [20, 21, 19, 22],
+    'Marks': [85, 90, 78, 88]
+}
+
+df = pd.DataFrame(data)
+
+# Filter
+top_students = df[df['Marks'] > 85]
+
+# Sort
+sorted_df = df.sort_values(by='Marks', ascending=False)
+
+print(sorted_df)
+```
+
+---
+
+
+
+Would you like me to make this into a **PDF “Pandas Notes for Beginners (DU B.Sc. CS)”** format for easy reference and printing?
