@@ -71,7 +71,7 @@ print(df.describe())
 import pandas as pd
 
 data = {
-    "Name": ["RAM", "SHYAM", "HUSSAIN", "KHAN"],
+   [ "Naveen", "Mayank", "Sumit", "Chanchal"],
     "ID": [0, 1, 2, 3],
     "AGE": [25, 53, 56, 79],
     "PERFORMANCE SCORE": [80, 90, 20, 30]
@@ -82,10 +82,10 @@ print(df)
 
 # Output:
 #      Name  ID  AGE  PERFORMANCE SCORE
-# 0     RAM   0   25                 80
-# 1   SHYAM   1   53                 90
-# 2 HUSSAIN   2   56                 20
-# 3    KHAN   3   79                 30
+# 0 Naveen    0   25                 80
+# 1 mayank    1   53                 90
+# 2 sumit     2   56                 20
+# 3 chanchal  3   79                 30
 ```
 
 ---
@@ -166,7 +166,7 @@ import pandas as pd
 import numpy as np
 
 data = {
-    "Name":["RAM", None, "SHYAM", "HUSSAIN", "KHAN"],
+    "Name":["Naveen", None, "Mayank", "Sumit", "Chanchal"],
     "ID":[0, None, 1, 2, 3],
     "AGE":[25, 53, 53, None, 53],
     "PERFORMANCE SCORE":[80,90,20,30, None],
