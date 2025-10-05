@@ -1,317 +1,167 @@
-# Pandas Notes
+# Numpy
 
----
-
-## Table of Contents
-1. Installation & Setup  
-2. Reading Files  
-3. Creating DataFrames  
-4. Viewing Data  
-5. Saving DataFrames  
-6. Selecting Data  
-7. Updating & Inserting Data  
-8. Handling Missing Data  
-9. Sorting & Grouping  
-10. Interpolation  
-11. Merging DataFrames  
-12. Concatenation  
-13. Understanding `ignore_index`  
-14. Conclusion  
-
----
-
-## Installation & Setup
-
-```bash
-# Install pandas
-pip install pandas
-
-# Install openpyxl for Excel support
-pip install openpyxl
-```
-
-CSV and JSON support works out-of-the-box.
-
----
-
-## Reading Files into Pandas
+## Importing numpy library
 
 ```python
-import pandas as pd
-
-# Reading Excel file
-df = pd.read_excel(r"C:\Users\hp\Desktop\filename.xlsx")
-
-# Reading CSV file
-df_csv = pd.read_csv("filename.csv")
-
-# Reading JSON file
-df_json = pd.read_json("filename.json")
-
-# Display the data
-print(df)
-
-# Show column names, null values count, data types. Gives general info of the data
-print(df.info())
-
-# Show basic statistics (mean, std, min, percentiles, etc.)
-print(df.describe())
-
-# Notes:
-# object → string/text
-# int64 → integers
-# float64 → decimals
-```
-
----
-
-## Creating a DataFrame
-
-```python
-import pandas as pd
-
-data = {
-   [ "Naveen", "Mayank", "Sumit", "Chanchal"],
-    "ID": [0, 1, 2, 3],
-    "AGE": [25, 53, 56, 79],
-    "PERFORMANCE SCORE": [80, 90, 20, 30]
-}
-
-df = pd.DataFrame(data)
-print(df)
-
-# Output:
-#      Name  ID  AGE  PERFORMANCE SCORE
-# 0 Naveen    0   25                 80
-# 1 mayank    1   53                 90
-# 2 sumit     2   56                 20
-# 3 chanchal  3   79                 30
-```
-
----
-
-## Viewing Data
-
-```python
-print(df.head(1))  # First row
-print(df.tail(1))  # Last row
-print("Shape:", df.shape)  # (rows, columns)
-print("Columns:", df.columns)
-
-# Output:
-#   Name  ID  AGE  PERFORMANCE SCORE
-# 0  RAM   0   25                 80
-# Shape: (4, 4)
-# Columns: Index(['Name','ID','AGE','PERFORMANCE SCORE'], dtype='object')
-```
-
----
-
-## Saving DataFrames
-
-```python
-df.to_excel("output.xlsx", index=False)  # Save Excel
-#index=False is used if you don't want indexing
-df.to_csv("output.csv")                  # Save CSV
-df.to_json("output.json")                # Save JSON
-```
-
----
-
-## Selecting Data
-
-```python
-# Selecting one column (returns Series)
-print(df["Name"])
-
-# Selecting multiple columns (returns DataFrame)
-print(df[["Name","AGE"]])
-
-# Selecting rows with conditions
-aged = df[(df['AGE'] > 50) & (df['PERFORMANCE SCORE'] > 50)]
-print(aged)
-
-aged2 = df[(df['AGE'] > 50) | (df['PERFORMANCE SCORE'] > 50)]
-print(aged2)
-```
-
----
-
-## Updating & Inserting Data
-
-```python
-# Update value
-df.loc[0, "AGE"] = 30
-print(df)
-
-# Update entire column
-df['PERFORMANCE SCORE'] = df['PERFORMANCE SCORE'] * 1.05
-print(df)
-
-# Insert a new column
-df['Bonus'] = df['PERFORMANCE SCORE'] * 0.1
-print(df)
-
-# Insert at specific position
-df.insert(0, "Emp-ID", [10, 20, 30, 40])
-print(df)
-```
-
----
-
-## Handling Missing Data
-
-```python
-import pandas as pd
 import numpy as np
-
-data = {
-    "Name":["Naveen", None, "Mayank", "Sumit", "Chanchal"],
-    "ID":[0, None, 1, 2, 3],
-    "AGE":[25, 53, 53, None, 53],
-    "PERFORMANCE SCORE":[80,90,20,30, None],
-    "Salary":[30000,50000,40000,70000,None]
-}
-
-df = pd.DataFrame(data)
-
-# Detect missing values
-print(df.isnull())
-print(df.isnull().sum())
-
-# Fill missing values
-df["AGE"].fillna(df["AGE"].mean(), inplace=True)
-df.fillna(0, inplace=True)
-
-# Drop rows with any missing values
-df.dropna(inplace=True)
-
-# Drop columns
-df.drop(columns=["ID","AGE"], inplace=True)
-#inplace=True is used when we want modification in our original dataframe
-print(df)
+import warnings
+warnings.filterwarnings("ignore")
+from IPython.display import Image
 ```
 
----
-
-## Sorting & Grouping
+## Creating array
 
 ```python
-# Sort values by AGE descending
-df.sort_values(by="AGE", ascending=False, inplace=True)
-print(df)
-
-# Group by AGE and sum Salary
-grouped = df.groupby("AGE")["Salary"].sum()
-print(grouped)
+list1 = [10,20,30,40,50,60,70,80,90,100]
+list1
 ```
+#### Output
+([ 10,  20,  30,  40,  50,  60,  70,  80,  90, 100])
 
----
-
-## Interpolation
+## Displaying type of object
 
 ```python
-data = {
-    "Time":[1,2,3,4,5],
-    "Value":[10, None, 30, 40,50]
-}
-df = pd.DataFrame(data)
-df['Value'] = df['Value'].interpolate(method='linear')
-print(df)
+type(list1)
 ```
-Interpolation analyze the pattern in the data and fill null values according to that. There are various methods in interpolation like we used above linear.
+#### Output
+list
 
----
-
-##  Merging DataFrames
+## Converting list to Numpy array
 
 ```python
-df_customers = pd.DataFrame({
-    'CustomerId':[1,2,3],
-    'Name':['Ramesh','Suresh','Kalpesh']
-})
-
-df_orders = pd.DataFrame({
-    'CustomerId':[1,2,4],
-    'OrderAmount':[250,450,350]
-})
-
-# Merge examples
-df_merged = pd.merge(df_customers, df_orders, on='CustomerId', how='right')
-#right gives common data plus data in right table
-print(df_merged)
-
-df_merged = pd.merge(df_customers, df_orders, on='CustomerId', how='left')
-#left gives common data plus data in left table
-print(df_merged)
-
-df_merged = pd.merge(df_customers, df_orders, on='CustomerId', how='outer')
-#outer combines both data from left and right dataframe
-print(df_merged)
-
-df_merged = pd.merge(df_customers, df_orders, on='CustomerId', how='inner') 
-#inner gives intersection of both
-print(df_merged)
+#Convert list to Numpy Array
+arr1 = np.array(list1)
+arr1
 ```
+#### Output
+array([ 10,  20,  30,  40,  50,  60,  70,  80,  90, 100])
 
----
-
-## Concatenation
+## Memory address of array object
 
 ```python
-df_Region1 = pd.DataFrame({
-    'CustomerId':[1,2,3],
-    'Name':['Ramesh','Suresh','Kalpesh']
-})
-
-df_Region2 = pd.DataFrame({
-    'CustomerId':[4,5,6],
-    'Name':['Imran','Khan','Hero']
-})
-
-# Concatenate vertically
-df_concat = pd.concat([df_Region1, df_Region2], axis=0, ignore_index=True)
-print(df_concat)
+arr1.data
 ```
+#### Output
+<memory at 0x7c7934e91480>
 
----
-
-### Understanding ignore_index
+## Type of object
 
 ```python
-# ignore_index=True resets the index after concatenation
-df_a = pd.DataFrame({"X":[1,2,3]})
-df_b = pd.DataFrame({"X":[4,5,6]})
-
-# Without ignore_index
-print(pd.concat([df_a, df_b], ignore_index=False))
-
-# With ignore_index
-print(pd.concat([df_a, df_b], ignore_index=True))
+type(arr1)
 ```
-We can also use axis=0 for concatenating according to row and axis = 1 for concatenating according to column.
+#### Output
+numpy.ndarray
 
-Output:  
+## Datatype of array
 
+```python
+arr1.dtype
 ```
-ignore_index=False:
-   X
-0  1
-1  2
-2  3
-0  4
-1  5
-2  6
+#### Output
+dtype('int64')
 
-ignore_index=True:
-   X
-0  1
-1  2
-2  3
-3  4
-4  5
-5  6
+## Converting integer array to float
+
+```python
+arr1.astype(float)
 ```
+#### Output
+array([ 10.,  20.,  30.,  40.,  50.,  60.,  70.,  80.,  90., 100.])
 
----
+## Generate numbers till 150 with spaces of 10
 
+```python
+np.arange(0,150,10)
+```
+#### Output
+array([  0,  10,  20,  30,  40,  50,  60,  70,  80,  90, 100, 110, 120, 130, 140])
+
+## Repeat a number in the array
+
+```python
+np.repeat(20, 7)
+```
+#### Output
+array([20, 20, 20, 20, 20, 20, 20])
+
+## Array of random numbers
+
+```python
+np.random.randint(0,500,10)
+```
+#### Output
+array([198, 358, 279, 474, 477])
+
+# Operations on Array
+
+```python
+arr2 = np.arange(1,25)
+arr2
+```
+#### Output
+array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24])
+
+## Sum of all elements
+
+```python
+arr2.sum()
+```
+#### Output
+np.int64(300)
+
+## Cumulative sum
+
+```python
+arr2.sum()
+```
+#### Output
+array([  1,   3,   6,  10,  15,  21,  28,  36,  45,  55,  66,  78,  91,
+       105, 120, 136, 153, 171, 190, 210, 231, 253, 276, 300])
+
+ ## Finding min number
+ 
+```python
+arr2.min()
+```
+#### Output
+np.int64(1)
+
+## Finding max number
+
+```python
+arr2.max()
+```
+#### Output
+np.int64(24)
+
+## Finding mean of all numbers in an array
+
+```python
+arr.mean()
+```
+#### Output
+np.float64(12.5)
+
+## Finding median of all numbers in an array
+
+```python
+np.median(arr2)
+```
+#### Output
+np.float64(12.5)
+
+## Finding variance
+
+```python
+np.var(arr2)
+```
+#### Output
+np.float64(47.916666666666664)
+
+## Finding standard deviation
+
+```python
+np.std(arr2)
+```
+#### Output
+np.float64(6.922186552431729)
