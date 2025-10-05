@@ -1,8 +1,5 @@
 
 
----
-
-### 🧠 **What is Pandas?**
 
 **Definition:**
 Pandas is a **Python library** used for **data analysis and manipulation**.
